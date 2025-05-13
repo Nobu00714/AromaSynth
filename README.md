@@ -1,0 +1,2 @@
+# AromaSynth
+AromaSynthのArduinoプログラムやUnityプログラム
