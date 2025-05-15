@@ -16,6 +16,7 @@ public class RecipeCollection {
 
 public class RecipeManager : MonoBehaviour
 {
+    public GameObject recipeButtonParent;
     private string fileName = "recipes.json";
     [System.NonSerialized] public RecipeCollection recipeCollection = new RecipeCollection();
     // ファイルのパスを取得
@@ -47,6 +48,21 @@ public class RecipeManager : MonoBehaviour
         } else {
             recipeCollection = new RecipeCollection(); // 初期化
         }
+    }
+    // レシピの一覧表示の更新
+    public void updateScrollView()
+    {
+        // Transform content = transform.Find("Viewport").Find("Content");
+        // ClearChildren(content);
+        // RecipeManager recipeManager = GameObject.Find("RecipeManager").GetComponent<RecipeManager>();
+        // recipeManager.LoadAllRecipes();
+        // for (int i = 0; i < recipeManager.recipeCollection.recipes.Count; i++)
+        // {
+        //     GameObject recipeButton = Instantiate(RecipeButtonPrefab, this.transform.Find("Viewport").Find("Content"));
+        //     recipeButtonObjectList.Add(recipeButton);
+        //     recipeButton.transform.Find("Button Text").GetComponent<TMPro.TextMeshProUGUI>().text = recipeManager.recipeCollection.recipes[i].recipeName;
+        //     recipeButton.GetComponent<RecipeButton>().recipe_output_ms_data = recipeManager.recipeCollection.recipes[i].values;
+        // }
     }
     // レシピの取得（インデックス指定）
     public RecipeData GetRecipe(int index) {
