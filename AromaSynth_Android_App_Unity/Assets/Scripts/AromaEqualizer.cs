@@ -7,7 +7,7 @@ public class AromaEqualizer : MonoBehaviour
 {
     public int[] output_ms_data = new int[20];
     [SerializeField] private float maximumOutput;
-    private GameObject[] AromaObjects = new GameObject[20];
+    public GameObject[] AromaObjects = new GameObject[20];
     private float[] graphY = new float[20];
     private float backgroundY;
     void Start()

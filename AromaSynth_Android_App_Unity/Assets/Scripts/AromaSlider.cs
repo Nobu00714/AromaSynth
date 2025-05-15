@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class AromaSlider : MonoBehaviour
 {
-    public enum AromaType
-    {
-        Aroma1, Aroma2, Aroma3, Aroma4, Aroma5,
-        Aroma6, Aroma7, Aroma8, Aroma9, Aroma10,
-        Aroma11, Aroma12, Aroma13, Aroma14, Aroma15,
-        Aroma16, Aroma17, Aroma18, Aroma19, Aroma20
-    }
-    public AromaType aromaType;
     public float slider_gain = 0.5f;
     private bool isDrag = false;
     private Vector3 previousMousePos = new Vector3(0,0,0);

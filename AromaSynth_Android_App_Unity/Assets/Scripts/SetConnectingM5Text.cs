@@ -14,6 +14,9 @@ public class SetConnectingM5Text : MonoBehaviour
 
     void Update()
     {
-        ConnectingM5Text.text = BLE.DeviceName;
+        if (BLE != null)
+        {
+            ConnectingM5Text.text = BLE.DeviceName;
+        }
     }
 }

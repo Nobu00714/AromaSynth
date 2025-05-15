@@ -17,12 +17,15 @@ public class SetButteryText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(BLE._dataBytes!=null)
+        if (BLE != null)
         {
-            data = BLE._dataBytes[0];
-            if(data <= 100)
+            if (BLE._dataBytes != null)
             {
-                butteryText.text = data.ToString();
+                data = BLE._dataBytes[0];
+                if (data <= 100)
+                {
+                    butteryText.text = data.ToString();
+                }
             }
         }
     }
