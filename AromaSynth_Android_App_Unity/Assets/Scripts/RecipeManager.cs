@@ -17,7 +17,7 @@ public class RecipeCollection {
 public class RecipeManager : MonoBehaviour
 {
     private string fileName = "recipes.json";
-    private RecipeCollection recipeCollection = new RecipeCollection();
+    [System.NonSerialized] public RecipeCollection recipeCollection = new RecipeCollection();
     // ファイルのパスを取得
     private string GetFilePath() {
         return Path.Combine(Application.persistentDataPath, fileName);

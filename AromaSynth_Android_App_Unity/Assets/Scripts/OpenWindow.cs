@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OpenSaveWindow : MonoBehaviour
+public class OpenWindow : MonoBehaviour
 {
-    public GameObject saveWindow;
+    public GameObject window;
     public void OnClick()
     {
-        saveWindow.SetActive(true);
+        window.SetActive(true);
     }
 }
