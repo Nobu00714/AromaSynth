@@ -9,7 +9,7 @@ using UnityEngine.Android;
 
 public class QRCodeReader : MonoBehaviour
 {
-    public string scanData;
+    public GameObject cameraWindow;
     public RawImage cameraView;
     private WebCamTexture camTexture;
     private bool isScanning = false;
@@ -28,6 +28,7 @@ public class QRCodeReader : MonoBehaviour
             // カメラ起動
             camTexture = new WebCamTexture();
             cameraView.texture = camTexture;
+            // cameraView.GetComponent<RectTransform>().sizeDelta = new Vector2(camTexture.width*100f,camTexture.height*100f);
             cameraView.material.mainTexture = camTexture;
             camTexture.Play();
 
@@ -60,11 +61,27 @@ public class QRCodeReader : MonoBehaviour
                 }
             };
             ZXing.Result result = reader.Decode(pixels, width, height);
-            scanData = result?.Text;
+            string scanData = result?.Text;
+
+            // QRコードの内容を20個の数値データに分割し、Aroma Equalizerのグラフの大きさに適用
+            AromaEqualizer aromaEqualizer = GameObject.Find("Aroma Equalizer").GetComponent<AromaEqualizer>();
+            // データをカンマで分割
+            string[] QRdataStringArray = scanData.Split(',');
+            int[] QRdataIntArray = new int[QRdataStringArray.Length];
+            // AromaEqualizerのoutput_ms_dataに変換
+            for (int i = 0; i < QRdataStringArray.Length; i++)
+            {
+                QRdataIntArray[i] = int.Parse(QRdataStringArray[i]);
+            }
+            aromaEqualizer.updateGraphByData(QRdataIntArray);
 
             if (result != null)
             {
-                CancelInvoke(nameof(ScanQR));  // 一度読み取ったら停止
+                // 一度読み取ったら停止
+                CancelInvoke(nameof(ScanQR));
+                camTexture.Stop();
+                isScanning = false;
+                cameraWindow.SetActive(false);
             }
         }
         catch (System.Exception e)

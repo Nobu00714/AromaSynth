@@ -35,6 +35,17 @@ public class AromaEqualizer : MonoBehaviour
         }
         PlayerPrefs.Save();
     }
+
+    public void updateGraphByData(int[] data)
+    {
+        for (int i = 0; i < data.Length; i++)
+        {
+            // グラフの高さに応じて出力ミリ秒を計算
+            float graphX = AromaObjects[i].transform.Find("Graph").GetComponent<RectTransform>().sizeDelta.x;
+            float backgroundY = AromaObjects[0].transform.Find("Background").GetComponent<RectTransform>().sizeDelta.y;
+            AromaObjects[i].transform.Find("Graph").GetComponent<RectTransform>().sizeDelta = new Vector2(graphX, data[i] / maximumOutput * backgroundY);
+        }
+    }
     // public void updateEqualizer_Slider(int tasteNum, float value)
     // {
     //     //ドラッグによる移動幅が同じになるように調整して加算
@@ -58,7 +69,7 @@ public class AromaEqualizer : MonoBehaviour
     //     {
     //         //4ml当たりの味覚物質量（出力量）に変換
     //         tastes_output_substances_data[i] = gptTasteEstimator.tasteData[i]*(spoonCapcity/1000);
-            
+
     //         //ボトル内の味覚物質量に占める割合に変換
     //         tastes_graphData[i] = tastes_output_substances_data[i] / taste_substance_in_bottles[i];
 

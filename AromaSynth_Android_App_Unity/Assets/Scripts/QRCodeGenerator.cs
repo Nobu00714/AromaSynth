@@ -8,7 +8,7 @@ using ZXing.QrCode;
 public class QRCodeGenerator : MonoBehaviour
 {
     public RawImage qrImageUI;
-    public string qrText = "Hello, World!";
+    private string qrText = "Hello, World!";
     public Texture2D GenerateQRCode(string text)
     {
         // QRコードの生成
