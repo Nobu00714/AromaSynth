@@ -13,12 +13,16 @@ public class QRCodeReader : MonoBehaviour
     public RawImage cameraView;
     private WebCamTexture camTexture;
     private bool isScanning = false;
-    public void ActivateScanCamera()
+    void Start()
     {
         if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
         {
             Permission.RequestUserPermission(Permission.Camera);
         }
+    }
+    public void ActivateScanCamera()
+    {
+        
         if (!isScanning)
         {
             // カメラ起動
