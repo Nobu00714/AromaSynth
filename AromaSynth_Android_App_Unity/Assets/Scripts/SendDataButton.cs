@@ -15,20 +15,26 @@ public class SendDataButton : MonoBehaviour
 
     public void OnClick()
     {
-        // tasteEqualizerのミリ秒データをM5に送信するためにカンマ区切りstringに変換
-        string sendData = "";
-        for(int i=0; i<aromaEqualizer.output_ms_data.Length; i++)
+        if (BLE != null)
         {
-            sendData += aromaEqualizer.output_ms_data[i];
-            if(i!=aromaEqualizer.output_ms_data.Length-1)
+            // tasteEqualizerのミリ秒データをM5に送信するためにカンマ区切りstringに変換
+            string sendData = "";
+            for (int i = 0; i < aromaEqualizer.output_ms_data.Length; i++)
             {
-                sendData += ",";
+                sendData += aromaEqualizer.output_ms_data[i];
+                if (i != aromaEqualizer.output_ms_data.Length - 1)
+                {
+                    sendData += ",";
+                }
             }
+            // BLEでデータを送信
+            BLE.SendByte(sendData);
+            // 送信データのテキストを画面上で更新
+            sendTextDisplay.text = sendData;
         }
-        sendData += ",0";
-        // BLEでデータを送信
-        BLE.SendByte(sendData);
-        // 送信データのテキストを画面上で更新
-        sendTextDisplay.text = sendData;
+        else
+        {
+            Debug.LogError("BLE is null");
+        }
     }
 }

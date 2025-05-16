@@ -5,21 +5,21 @@ using TMPro;
 
 public class SaveButton : MonoBehaviour
 {
-    public TextMeshProUGUI recipeNameText;
+    public TMP_InputField recipeNameInputField;
     public void OnClick()
     {
         AromaEqualizer aromaEqualizer = GameObject.Find("Aroma Equalizer").GetComponent<AromaEqualizer>();
         RecipeManager recipeManager = GameObject.Find("RecipeManager").GetComponent<RecipeManager>();
-        string recipeName = recipeNameText.text;
-        if (recipeName == "")
+        if (string.IsNullOrWhiteSpace(recipeNameInputField.text))
         {
             Debug.Log("Please enter a recipe name.");
         }
         else
         {
             // recipeを保存して保存ウィンドウを閉じる
-            recipeManager.AddAndSaveRecipe(recipeName, aromaEqualizer.output_ms_data);
+            recipeManager.AddAndSaveRecipe(recipeNameInputField.text, aromaEqualizer.output_ms_data);
             this.transform.parent.gameObject.SetActive(false);
+            recipeNameInputField.text = ""; // 入力フィールドをクリア
         }
     }
 }

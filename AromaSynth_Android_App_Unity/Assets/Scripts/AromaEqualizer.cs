@@ -12,27 +12,28 @@ public class AromaEqualizer : MonoBehaviour
     private float backgroundY;
     void Start()
     {
-        for(int i=0; i<AromaObjects.Length; i++)
+        for (int i = 0; i < AromaObjects.Length; i++)
         {
             AromaObjects[i] = this.transform.GetChild(i).gameObject;
+            AromaObjects[i].GetComponent<AromaSlider>().SetGraphSize(PlayerPrefs.GetFloat("Aroma" + i.ToString()));
         }
         backgroundY = AromaObjects[0].transform.Find("Background").GetComponent<RectTransform>().sizeDelta.y;
     }
     void Update()
     {
         // Update the output_ms_data for each aroma graph
-        for (int i=0; i<AromaObjects.Length; i++)
+        for (int i = 0; i < AromaObjects.Length; i++)
         {
-            if (AromaObjects[i] != null)
-            {
-                // グラフの高さに応じて出力ミリ秒を計算
-                graphY[i] = AromaObjects[i].transform.Find("Graph").GetComponent<RectTransform>().sizeDelta.y;
-                output_ms_data[i] = (int)(graphY[i]/backgroundY * maximumOutput);
+            // グラフの高さに応じて出力ミリ秒を計算
+            graphY[i] = AromaObjects[i].transform.Find("Graph").GetComponent<RectTransform>().sizeDelta.y;
+            output_ms_data[i] = (int)(graphY[i] / backgroundY * maximumOutput);
 
-                // 表示文字変更
-                AromaObjects[i].transform.Find("Num").GetComponent<TextMeshProUGUI>().text = (output_ms_data[i]).ToString() + " ms";
-            }
+            // 表示文字変更
+            AromaObjects[i].transform.Find("Num").GetComponent<TextMeshProUGUI>().text = (output_ms_data[i]).ToString() + " ms";
+
+            PlayerPrefs.SetFloat("Aroma" + i.ToString(), graphY[i]);
         }
+        PlayerPrefs.Save();
     }
     // public void updateEqualizer_Slider(int tasteNum, float value)
     // {
